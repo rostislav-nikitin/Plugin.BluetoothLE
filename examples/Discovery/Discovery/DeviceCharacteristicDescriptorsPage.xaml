@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Discovery.DeviceCharacteristicDescriptorsPage"
+             Title="Select descriptor:">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0"
+                       Text="Descriptors" FontSize="Medium" />
+                <ListView 
+                    x:Name="lvDescriptors"
+                    Grid.Column="0" Grid.Row="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Uuid}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Label 
+                    x:Name="labelTransmit" 
+                    Grid.Column="0" Grid.Row="2" 
+                    FontSize="72"
+                    HorizontalOptions="Center"
+                    IsEnabled="{Binding CanWrite}" 
+                    Text="{Binding Source={x:Reference stepperDigit}, Path=Value}"/>
+                <Stepper 
+                    x:Name="stepperDigit"
+                    Grid.Column="0" Grid.Row="3" 
+                    HorizontalOptions="Center"
+                    Minimum="0" Maximum="9" Increment="1" ValueChanged="Stepper_ValueChanged" />
+                <Button 
+                    x:Name="buttonTransmit"
+                    Grid.Column="0" Grid.Row="4"
+                    Text="Transmit" IsEnabled="{Binding CanWrite}"
+                    Clicked="buttonTransmit_Clicked"/>
+                <Button 
+                    x:Name="buttonRecive" 
+                    Grid.Column="0" Grid.Row="5"
+                    Text="Recive" IsEnabled="{Binding CanRead}"
+                    Clicked="buttonRecive_Clicked"/>
+                <Button 
+                    x:Name="buttonNotify" 
+                    Grid.Column="0" Grid.Row="6"
+                    Text="Notify" IsEnabled="{Binding CanBeNotified}"
+                    Clicked="buttonNotify_Clicked"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
